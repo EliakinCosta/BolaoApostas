@@ -60,3 +60,9 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+
+#files not included
+
+virtual
+db.sqlite3
+.DS_Store

@@ -21,6 +21,7 @@ from django.conf.urls.static import static as staticurl
 urlpatterns = [
     url(r'^ajaximage/', include('ajaximage.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^$', include('administracao.urls')),
 ]
 
 

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'administracao',
+    'ajaximage',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -101,11 +102,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+#para ajax image rodar
+AJAXIMAGE_AUTH_TEST = lambda u: True
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'PT_br'
 
 TIME_ZONE = 'UTC'
 
@@ -120,3 +123,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static")
+MEDIA_URL="/media/"
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")

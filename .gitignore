@@ -67,3 +67,5 @@ virtual
 db.sqlite3
 .DS_Store
 .idea/
+bolaoaposta/db.sqlite3
+bolaoaposta/administracao/migrations/

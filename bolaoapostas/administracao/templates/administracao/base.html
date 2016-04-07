@@ -53,8 +53,13 @@
                     <li>
                         <a href="#">Sobre</a>
                     </li>
+
                     <li>
-                        <a href="{% url 'contas:login' %}">Entrar</a>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'contas:logout' %}">Sair</a>
+                        {% else %}
+                            <a href="{% url 'contas:login' %}">Entrar</a>
+                        {% endif %}
                     </li>
                 </ul>
             </div>

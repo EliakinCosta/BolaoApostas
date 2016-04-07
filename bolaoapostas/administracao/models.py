@@ -3,10 +3,12 @@ from django.contrib.auth.models import User
 from ajaximage.fields import AjaxImageField
 # Create your models here.
 
-class Jogador(models.Model):
-    usuario = models.OneToOneField(User, on_delete=models.CASCADE, blank=False, null=False)
-    saldo = models.DecimalField(blank=False, null=False, max_digits=18, default=10.0, decimal_places=2)
 
+class Jogador(models.Model):
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
+    nome = models.CharField(max_length=55, null=False, blank=False)
+    login = models.CharField(max_length=55, null=False, blank=False, unique=True)
+    senha = models.CharField(max_length=25, null=False, blank=False)
 
 class Time(models.Model):
     id = models.AutoField(primary_key=True, unique=True)

@@ -1,5 +1,5 @@
 from django.shortcuts import render
 
 # Create your views here.
-def abrir_login(request):
-    return render(request, 'administracao/login.html', {})
+def base_site(request):
+    return render(request, 'administracao/base.html', {})

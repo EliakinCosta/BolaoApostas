@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'administracao',
     'ajaximage',
+    'contas',
 ]
 
 MIDDLEWARE_CLASSES = [

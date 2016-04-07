@@ -11,8 +11,6 @@ class JogadorInline(admin.StackedInline):
 class UserAdmin(admin.ModelAdmin):
     inlines = (JogadorInline, )
 
-admin.site.unregister(User)
-admin.site.register(User, UserAdmin)
 admin.site.register(Time)
 admin.site.register(Partida)
 admin.site.register(Aposta)

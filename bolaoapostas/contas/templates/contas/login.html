@@ -1,30 +1,33 @@
 {% extends "administracao/base.html" %}
-
+{% load csstags %}
 {% block content %}
 <!--login modal-->
-  <div class="modal-dialog">
-  <div class="modal-content">
-      <div class="modal-header">
-          <h1 class="text-center">Login</h1>
-      </div>
-      <div class="modal-body">
-          <form class="form col-md-12 center-block">
-            <div class="form-group">
-              <input type="text" class="form-control input-lg" placeholder="Email">
-            </div>
-            <div class="form-group">
-              <input type="password" class="form-control input-lg" placeholder="Senha">
-            </div>
-            <div class="form-group">
-              <button class="btn btn-primary btn-lg btn-block">Logar</button>
-                <br/>
-              <span class="pull-right"><a href="#">Registrar</a></span><span><a href="#">Esqueceu sua senha?</a></span>
-            </div>
-          </form>
-      </div>
-      <div class="modal-footer">
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="text-center">Login</h1>
+        </div>
+        <div class="modal-body">
+            <form class="form col-md-12 center-block">
+                {{ form.non_field_errors }}
+                {% for campo in form %}
+                <div class="form-group">
+                    {{ campo.label_tag}}
+                    {{campo |addcss:"form-control input-lg"}}
+                    {{ campo.errors}}
+                    {% endfor%}
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary btn-lg btn-block">Logar</button>
+                    <br/>
+                    <span class="pull-right"><a href="#">Registrar</a></span><span><a
+                        href="#">Esqueceu sua senha?</a></span>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
 
-      </div>
-  </div>
-  </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

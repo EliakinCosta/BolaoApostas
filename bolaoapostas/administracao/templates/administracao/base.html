@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
-    <body background="{% static 'images/backimage.png' %}">
+<body background="{% static 'images/backimage.png' %}">
 <head>
 
     <meta charset="utf-8">
@@ -21,75 +21,83 @@
         padding-top: 70px;
         /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
     }
+
     </style>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
 </head>
 
 <body>
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href=" {% url 'administracao:inicio'%}">BetSoccer</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">Sobre</a>
-                    </li>
-
-                    <li>
-                        {% if user.is_authenticated %}
-                            <a href="{% url 'contas:painel' %}">Painel</a>
-                            <a href="{% url 'contas:logout' %}">Sair</a>
-                        {% else %}
-                            <a href="{% url 'contas:login' %}">Entrar</a>
-                        {% endif %}
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href=" {% url 'administracao:inicio'%}">BetSoccer</a>
         </div>
-        <!-- /.container -->
-    </nav>
-        <!-- Page Content -->
-        <div class="container">
-           {% block content %}
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h1>Aqui vamos colocar as informações do site</h1>
-                    <p class="lead">Este template é estendido apenas pelo login e sobre!</p>
-                    <ul class="list-unstyled">
-                        <li>Bootstrap v3.3.6</li>
-                        <li>jQuery v1.11.1</li>
-                    </ul>
-                </div>
-            </div>
-            <!-- /.row -->
-            {% endblock %}
-        </div>
-        <!-- /.container -->
-    <!-- jQuery Version 1.11.1 -->
-    <script src="{% static 'js/jquery.js' %}"></script>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#">Sobre</a>
+                </li>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'contas:painel' %}">Painel</a>
+                </li>
+                <li>
+                    <a href="{% url 'contas:logout' %}">Sair</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'contas:login' %}">Entrar</a>
+                </li>
+                {% endif %}
+
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<!-- Page Content -->
+<div class="container">
+    {% block content %}
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h1>Aqui vamos colocar as informações do site</h1>
+            <p class="lead">Este template é estendido apenas pelo login e sobre!</p>
+            <ul class="list-unstyled">
+                <li>Bootstrap v3.3.6</li>
+                <li>jQuery v1.11.1</li>
+            </ul>
+        </div>
+    </div>
+    <!-- /.row -->
+    {% endblock %}
+</div>
+<!-- /.container -->
+<!-- jQuery Version 1.11.1 -->
+<script src="{% static 'js/jquery.js' %}"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
 
 </body>
 

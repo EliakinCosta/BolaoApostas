@@ -6,7 +6,8 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def painel(request):
     template_name = 'contas/partidas.html'
-    return render(request, template_name, {'jogador':queryset_Jogador(request.user)})
+    partidas = Partida.objects.all()
+    return render(request, template_name, {'jogador':queryset_Jogador(request.user), 'partidas':partidas})
 
 def queryset_Jogador(usuario):
     lista_contem_jogador = Jogador.objects.all().filter(usuario=usuario).values()

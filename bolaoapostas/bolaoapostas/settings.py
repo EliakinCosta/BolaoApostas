@@ -111,7 +111,7 @@ AJAXIMAGE_AUTH_TEST = lambda u: True
 
 LANGUAGE_CODE = 'PT_br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Bahia'
 
 USE_I18N = True
 

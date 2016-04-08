@@ -131,5 +131,5 @@ MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media")
 
 #Autenticacao
 LOGIN_URL = 'contas:login'
-LOGIN_REDIRECT_URL = 'administracao:inicio'
+LOGIN_REDIRECT_URL = 'contas:painel'
 LOGOUT_URL = 'contas:logout'

@@ -56,6 +56,7 @@
 
                     <li>
                         {% if user.is_authenticated %}
+                            <a href="{% url 'contas:painel' %}">Painel</a>
                             <a href="{% url 'contas:logout' %}">Sair</a>
                         {% else %}
                             <a href="{% url 'contas:login' %}">Entrar</a>

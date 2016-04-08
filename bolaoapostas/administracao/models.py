@@ -9,6 +9,7 @@ class Jogador(models.Model):
     nome = models.CharField(max_length=55, null=False, blank=False)
     login = models.CharField(max_length=55, null=False, blank=False, unique=True)
     senha = models.CharField(max_length=25, null=False, blank=False)
+    saldo = models.DecimalField(decimal_places=2, max_digits=18, default=10.00)
 
 class Time(models.Model):
     id = models.AutoField(primary_key=True, unique=True)

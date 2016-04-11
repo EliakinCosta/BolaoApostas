@@ -23,6 +23,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^conta/', include('contas.urls', namespace='contas')),
     url(r'^$', include('administracao.urls', namespace='administracao')),
+
+
 ]
 
 

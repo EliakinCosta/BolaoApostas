@@ -1,8 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from ajaximage.fields import AjaxImageField
-from datetime import datetime
-from django.utils import dateparse
+
 # Create your models here.
 
 
@@ -38,7 +37,6 @@ class Partida(models.Model):
     gols_casa = models.IntegerField(default=0, blank=False, null=False)
     gols_visitante = models.IntegerField(default=0, blank=False, null=False)
     status = models.ForeignKey(StatusPartida, blank=False, null=False)
-    horario = models.DateTimeField(blank=False, null=False)
 
     def __str__(self):
         return str(self.time_casa) + " x " + str(self.time_visitante)

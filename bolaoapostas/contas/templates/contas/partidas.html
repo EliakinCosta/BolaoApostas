@@ -11,11 +11,12 @@
                 <h1 class="page-header">
                     <h2>Partidas</h2>
                     <div class="div-table">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" id="tb_partidas">
+                            {% csrf_token %}
                             {% for partida in partidas %}
                             <tr>
                                 <td>{{ partida }}</td>
-                                <td><input name="btApostas" class="btn btn-primary" type="submit" value="Apostar" /> </td>
+                                <td><input id="{{partida.id}}" name="btApostas" class="btn btn-primary" type="submit" value="Apostar" onclick="apostar(this.getAttribute('id'))"/> </td>
                             </tr>
                             {% endfor %}
                         </table>
@@ -25,6 +26,30 @@
         </div>
     </div>
 </div>
+    {% block js %}
+
+    <script type="text/javascript">
+
+    function apostar(element){
+        console.log(element);
+
+        ajax = new XMLHttpRequest();
+        ajax.onreadystatechanged = function() {
+            if(ajax.readystate == 4 && ajax.status == 200){
+
+            }
+        };
+
+        ajax.open("POST", "apostar/"+element, true);
+        ajax.send();
+
+    }
+
+
+    </script>
+
+    {% endblock %}
 
 
 {% endblock %}
+

@@ -13,3 +13,6 @@ def queryset_Jogador(usuario):
     lista_contem_jogador = Jogador.objects.all().filter(usuario=usuario).values()
     jogador = list(lista_contem_jogador)[0]
     return jogador
+
+def print(request):
+    return render(request, "contas/helloajax.html",{})

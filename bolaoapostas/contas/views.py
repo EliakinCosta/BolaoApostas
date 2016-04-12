@@ -4,7 +4,7 @@ from decimal import Decimal
 import json
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
-
+from django.shortcuts import render_to_response
 
 # Create your views here.
 
@@ -55,3 +55,12 @@ def queryset_apostas_partida_jogador(apostador, partida):
 def sacar_aposta(jogador):
     jogador.saldo = float(jogador.saldo) - 5
     jogador.save(update_fields=["saldo"])
+
+def query_set_apostas_jogador(jogador):
+    return Aposta.objects.all().filter(apostador=jogador)
+
+
+def get_apostas(request):
+    template_name = 'contas/apostas.html'
+    jogador = queryset_Jogador(request.user)
+    return render(request, template_name, {'apostas':query_set_apostas_jogador(jogador)})

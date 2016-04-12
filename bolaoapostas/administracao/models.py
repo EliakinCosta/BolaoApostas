@@ -50,6 +50,9 @@ class Aposta(models.Model):
     gols_time_visitante = models.IntegerField(default=0, blank=False, null=False)
     valor = models.DecimalField(max_digits=3, decimal_places=2, default=5.0, blank=False, null=False)
 
+    def __str__(self):
+        return str(self.id_partida) + " " + str(self.gols_time_casa) + " x " + str(self.gols_time_visitante)
+
 
 class Movimentacao(models.Model):
     id = models.AutoField(primary_key=True, unique=True)

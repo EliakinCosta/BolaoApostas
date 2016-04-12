@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^entrar/$', auth_view.login , {'template_name':'contas/login.html'}, name='login'),
     url(r'^sair/$', auth_view.logout, {'next_page':'administracao:inicio'}, name='logout'),
     url(r'^apostar/', views.apostar),
+    url(r'^apostas/$', views.get_apostas, name='apostas'),
 ]

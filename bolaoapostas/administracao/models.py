@@ -45,6 +45,7 @@ class Partida(models.Model):
 class Aposta(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     id_partida = models.ForeignKey(Partida, blank=False, null=False)
+    apostador = models.ForeignKey(Jogador, blank=False, null=False)
     gols_time_casa = models.IntegerField(default=0, blank=False, null=False)
     gols_time_visitante = models.IntegerField(default=0, blank=False, null=False)
     valor = models.DecimalField(max_digits=3, decimal_places=2, default=5.0, blank=False, null=False)

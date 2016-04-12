@@ -7,5 +7,5 @@ urlpatterns = [
     url(r'^$', views.painel, name='painel'),
     url(r'^entrar/$', auth_view.login , {'template_name':'contas/login.html'}, name='login'),
     url(r'^sair/$', auth_view.logout, {'next_page':'administracao:inicio'}, name='logout'),
-    url(r'^apostar/(\d+)$', views.print),
+    url(r'^apostar/', views.apostar),
 ]

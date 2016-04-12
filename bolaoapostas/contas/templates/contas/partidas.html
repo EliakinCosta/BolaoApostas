@@ -9,46 +9,63 @@
         <div class="row">
             <div class="col-lg-8">
                 <h1 class="page-header">
-                    <h2>Partidas</h2>
-                    <div class="div-table">
+                    <div id="msg_alert" class="container">
+                        <div class="alert alert-danger">
+                            <a id="fechar_alert" href="#" class="close" aria-label="close">&times;</a>
+                            <p style="font-size:12px;"><strong>Bloqueado!</strong> O seu saldo é insuficiente ou já realizou apostas para esta partida.</p>
+                        </div>
+                        </div>
+                        <h2>Partidas</h2>
                         <table class="table table-bordered" id="tb_partidas">
                             {% csrf_token %}
                             {% for partida in partidas %}
                             <tr>
                                 <td>{{ partida }}</td>
-                                <td><input id="{{partida.id}}" name="btApostas" class="btn btn-primary" type="submit" value="Apostar" onclick="apostar(this.getAttribute('id'))"/> </td>
+                                <td><input id="{{partida.id}}" name="btApostar" class="btn btn-primary"
+                                           type="button" value="Apostar"/></td>
                             </tr>
                             {% endfor %}
                         </table>
-                    </div>
                 </h1>
             </div>
         </div>
     </div>
 </div>
-    {% block js %}
 
-    <script type="text/javascript">
+<script type="text/javascript">
+$(document).ready(function(){
 
-    function apostar(element){
-        console.log(element);
+    $('#msg_alert').hide();
 
-        ajax = new XMLHttpRequest();
-        ajax.onreadystatechanged = function() {
-            if(ajax.readystate == 4 && ajax.status == 200){
+    $('#fechar_alert').click(function(){
+        $('#msg_alert').hide();
+    });
 
-            }
-        };
+    $('#tb_partidas td input').click(function(){
+        $.ajax({
+            type: 'POST',
+            url: 'apostar/',
+            data:{
+                csrfmiddlewaretoken:'{{ csrf_token }}',
+                id_partida:$(this).attr('id')
+            },
+            success:function(data) {
+                    $('#jogador_saldo').text((data["jogador"]));
+                    $(this).prop('disabled', true);
+                    alert('aposta realizada com sucesso');
 
-        ajax.open("POST", "apostar/"+element, true);
-        ajax.send();
+           },
+           error: function(){
+                $('#msg_alert').fadeTo(2000, 500).slideUp(500, function(){
+                    $("#danger-alert").alert('close');
+                });
+           }
+        });
+    });
+});
 
-    }
 
-
-    </script>
-
-    {% endblock %}
+</script>
 
 
 {% endblock %}

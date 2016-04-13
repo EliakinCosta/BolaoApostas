@@ -33,6 +33,11 @@ class PartidaAdmin(admin.ModelAdmin):
                     ganhador.saldo = float(ganhador.saldo) + float((quantidade_apostas * 5) / len(ganhadores))
                     ganhador.save()
         obj.save()
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj and obj.status.id == 2:
+            return self.readonly_fields + ('status',)
+        return self.readonly_fields
     
     def get_ganhadores(self, partida):
         apostas = Aposta.objects.all().filter(id_partida = partida)

@@ -1,0 +1,23 @@
+{% extends "contas/base.html" %}
+
+{% block content %}
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-8">
+                <h1 class="page-header">
+                        <h2>Ranking dos jogadores</h2>
+                        <table class="table table-bordered" id="tb_partidas">
+                            {% csrf_token %}
+                            
+                            <div>Hello Ranking!!</div>
+                        </table>
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

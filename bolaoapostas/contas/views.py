@@ -64,3 +64,7 @@ def get_apostas(request):
     template_name = 'contas/apostas.html'
     jogador = queryset_Jogador(request.user)
     return render(request, template_name, {'apostas':query_set_apostas_jogador(jogador)})
+    
+def ranking(request):
+    template_name = 'contas/ranking.html'
+    return render(request, template_name, {})

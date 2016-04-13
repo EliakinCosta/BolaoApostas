@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^sair/$', auth_view.logout, {'next_page':'administracao:inicio'}, name='logout'),
     url(r'^apostar/', views.apostar),
     url(r'^apostas/$', views.get_apostas, name='apostas'),
+    url(r'ranking/$', views.ranking, name='ranking'),
 ]

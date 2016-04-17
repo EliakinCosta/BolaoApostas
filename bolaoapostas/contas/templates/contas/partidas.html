@@ -10,7 +10,7 @@
             <div class="col-lg-8">
                 <h1 class="page-header">
                     <div id="msg_alert" class="container">
-                        <div class="alert alert-danger">
+                        <div class="alert">
                             <a id="fechar_alert" href="#" class="close" aria-label="close">&times;</a>
                             <p style="font-size:12px;"><strong>Bloqueado!</strong> O seu saldo é insuficiente ou já realizou apostas para esta partida.</p>
                         </div>
@@ -34,7 +34,6 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-
     $('#msg_alert').hide();
 
     $('#fechar_alert').click(function(){
@@ -50,10 +49,11 @@ $(document).ready(function(){
                 id_partida:$(this).attr('id')
             },
             success:function(data) {
-                    $('#jogador_saldo').text((data["jogador"]));
-                    $(this).prop('disabled', true);
-                    alert('aposta realizada com sucesso');
-
+                $(this).prop("disabled", true);
+                $('#jogador_saldo').text((data["jogador"]));
+                $('#msg_alert').fadeTo(2000, 500).slideUp(500, function(){
+                    $("#success-alert").alert('close');
+                });
            },
            error: function(){
                 $('#msg_alert').fadeTo(2000, 500).slideUp(500, function(){

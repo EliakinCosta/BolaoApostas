@@ -1,7 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
 from ajaximage.fields import AjaxImageField
-
+from django.db.models.signals import pre_save, post_save
+from django.dispatch import receiver
+from django import forms
+from django.core.exceptions import ValidationError
 # Create your models here.
 
 
@@ -11,6 +14,9 @@ class Jogador(models.Model):
     login = models.CharField(max_length=55, null=False, blank=False, unique=True)
     senha = models.CharField(max_length=25, null=False, blank=False)
     saldo = models.DecimalField(decimal_places=2, max_digits=18, default=10.00)
+    
+    def __str__(self):
+        return self.nome
 
 class Time(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
@@ -58,3 +64,12 @@ class Movimentacao(models.Model):
     id = models.AutoField(primary_key=True, unique=True)
     jogador = models.ForeignKey(Jogador)
     valor = models.DecimalField(decimal_places=2, max_digits=18, default=10.00)
+    
+    def __str__(self):
+        return str(self.jogador.nome) + ' ' + str(self.valor)
+        
+        
+@receiver(post_save, sender=Movimentacao)
+def alterar_saldo_movimentacao_signal(sender, instance, **kwargs):
+    instance.jogador.saldo = float(instance.jogador.saldo) + float(instance.valor)
+    instance.jogador.save()

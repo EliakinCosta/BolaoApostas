@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import *
 from django.contrib.auth.models import User
+from .forms import *
 # Register your models here.
 
 
@@ -15,15 +16,20 @@ class JogadorAdmin(admin.ModelAdmin):
         form = super(JogadorAdmin, self).get_form(request, obj, **kwargs)
         self.exclude = ('usuario',)
         if obj:
-            self.exclude = ('usuario',)
+            self.exclude = ('usuario','senha')
         return form
 
     def delete_model(self, request, obj):
         obj.user.delete()
         obj.delete()
+        
+    def get_readonly_fields(self, request, obj=None):
+        if obj:
+            return self.readonly_fields + ('saldo',)
+        return self.readonly_fields
 
 class PartidaAdmin(admin.ModelAdmin):
-    """ """
+    
     def save_model(self, request, obj, form, change):
         if obj:
             if obj.status.id == 2:
@@ -87,10 +93,16 @@ class PartidaAdmin(admin.ModelAdmin):
             return -1
         else:
             return 0
+            
+
+class MovimentacaoAdmin(admin.ModelAdmin):
+    
+    form = MovimentacaoAdminForm
+
 
 admin.site.register(Time)
 admin.site.register(Partida, PartidaAdmin)
 admin.site.register(Aposta)
 admin.site.register(StatusPartida)
 admin.site.register(Jogador, JogadorAdmin)
-admin.site.register(Movimentacao)
+admin.site.register(Movimentacao, MovimentacaoAdmin)

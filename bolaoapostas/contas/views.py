@@ -27,16 +27,18 @@ def get_partidas_apostadas(usuario):
 def apostar(request):
     if request.method == 'POST':
         id_partida = request.POST['id_partida']
+        placar_casa = request.POST['placar_casa']
+        placar_visitante = request.POST['placar_visitante']
         jogador = queryset_Jogador(request.user)
         partida = Partida.objects.all().get(id=id_partida)
         print(queryset_apostas_partida_jogador(jogador, partida))
-        if queryset_apostas_partida_jogador(jogador, partida):
+        if queryset_apostas_partida_jogador(jogador, partida) or jogador.saldo < 5:
             return HttpResponse(status_code=400)
         else:
             Aposta.objects.create(
                 id_partida=partida,
-                gols_time_casa=0,
-                gols_time_visitante=0,
+                gols_time_casa=placar_casa,
+                gols_time_visitante=placar_visitante,
                 valor=5.00,
                 apostador=jogador
             )

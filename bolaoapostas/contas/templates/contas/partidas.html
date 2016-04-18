@@ -35,9 +35,9 @@
                             {% for partida in partidas %}
                                 <tr>
                                     <td><span id="time_casa">{{ partida.time_casa }}</span></td>
-                                    <td><span><input type="text" name="gols_casa" value="{{partida.gols_casa}}"/></span></td>
+                                    <td><span><input type="text" id="placar_casa" name="gols_casa" value="{{partida.gols_casa}}"/></span></td>
                                     <td> X </td>
-                                    <td><span><input type="text" name="gols_visitante" value="{{partida.gols_visitante}}"/></span></td>
+                                    <td><span><input type="text" id="placar_visitante" name="gols_visitante" value="{{partida.gols_visitante}}"/></span></td>
                                     <td><span id="time_visitante">{{ partida.time_visitante }}</span></td>
                                     <td>
                                         <input id="{{partida.id}}" name="btApostar" class="btn btn-primary"
@@ -60,10 +60,7 @@ $(document).ready(function(){
     $('#fechar_alert').click(function(){
         $('.container').hide();
     });
-    
-    $('#tb_partidas td input').click(function(){
-        var dados = $(document)('#tb_partidas td')
-    });
+
     
     $('#tb_partidas td input').click(function(){
         $.ajax({
@@ -71,7 +68,9 @@ $(document).ready(function(){
             url: 'apostar/',
             data:{
                 csrfmiddlewaretoken:'{{ csrf_token }}',
-                id_partida:$(this).attr('id')
+                id_partida:$(this).attr('id'),
+                placar_casa:$('#placar_casa').val(),
+                placar_visitante:$('#placar_visitante').val()
             },
             success:function(data) {
                 $(this).prop("disabled", true);

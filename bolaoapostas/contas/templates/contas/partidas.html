@@ -28,17 +28,20 @@
                         {% csrf_token %}
                         <thead>
                         <tr>
-                            <th>Partida</th>
-                            <th>Apostar</th>
+                            <th colspan="6" align="center">Partidas</th>
                         </tr>
                         </thead>
                         <tbody>
                             {% for partida in partidas %}
                                 <tr>
-                                    <td>{{ partida }}</td>
+                                    <td><span id="time_casa">{{ partida.time_casa }}</span></td>
+                                    <td><span><input type="text" name="gols_casa" value="{{partida.gols_casa}}"/></span></td>
+                                    <td> X </td>
+                                    <td><span><input type="text" name="gols_visitante" value="{{partida.gols_visitante}}"/></span></td>
+                                    <td><span id="time_visitante">{{ partida.time_visitante }}</span></td>
                                     <td>
                                         <input id="{{partida.id}}" name="btApostar" class="btn btn-primary"
-                                               type="button" value="Apostar" {% if partida in partidas_jogador %} disabled="true" {% endif %}/>
+                                               type="button" value="Apostar" {% if partida in partidas_jogador %} disabled="true" {% endif %} />
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -57,7 +60,11 @@ $(document).ready(function(){
     $('#fechar_alert').click(function(){
         $('.container').hide();
     });
-
+    
+    $('#tb_partidas td input').click(function(){
+        var dados = $(document)('#tb_partidas td')
+    });
+    
     $('#tb_partidas td input').click(function(){
         $.ajax({
             type: 'POST',

@@ -55,7 +55,6 @@ def apostar(request):
 def queryset_apostas_partida_jogador(apostador, partida):
     return Aposta.objects.all().filter(apostador=apostador, id_partida=partida)
 
-
 def sacar_aposta(jogador):
     jogador.saldo = float(jogador.saldo) - 5
     jogador.save(update_fields=["saldo"])
@@ -71,4 +70,5 @@ def get_apostas(request):
     
 def ranking(request):
     template_name = 'contas/ranking.html'
-    return render(request, template_name, {})
+    return render(request, template_name, {'ranking':Jogador.objects.order_by('saldo')})
+

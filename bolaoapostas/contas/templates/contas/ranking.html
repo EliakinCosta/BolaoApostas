@@ -12,8 +12,18 @@
                         <h2>Ranking dos jogadores</h2>
                         <table class="table table-bordered" id="tb_partidas">
                             {% csrf_token %}
-                            
-                            <div>Hello Ranking!!</div>
+                            <thead>
+                        <tr>
+                            <th>Jogador</th>
+                            <th>Saldo</th>
+                        </tr>
+                        </thead>
+                             {% for jogador in ranking %}
+                            <tr>
+                                <td>{{ jogador.nome }}</td>
+                                <td>{{ jogador.saldo }}</td>
+                            </tr>
+                            {% endfor %}
                         </table>
                 </h1>
             </div>

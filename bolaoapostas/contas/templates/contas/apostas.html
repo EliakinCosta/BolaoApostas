@@ -9,14 +9,12 @@
         <div class="row">
             <div class="col-lg-8">
                 <h1 class="page-header">
-                        <h2>Partidas</h2>
+                        <h2>Minhas Apostas</h2>
                         <table class="table table-bordered" id="tb_partidas">
                             {% csrf_token %}
                              {% for aposta in apostas %}
                             <tr>
                                 <td>{{ aposta }}</td>
-                                <td><input id="{{partida.id}}" name="btApostar" class="btn btn-primary"
-                                           type="button" value="Apostar"/></td>
                             </tr>
                             {% endfor %}
                         </table>

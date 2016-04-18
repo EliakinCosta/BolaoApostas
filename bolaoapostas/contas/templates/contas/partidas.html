@@ -1,7 +1,7 @@
 {% extends "contas/base.html" %}
 
 {% block content %}
-<div id="page-wrapper">
+<div id="page-wrapper" xmlns:slice="http://www.w3.org/1999/xhtml">
 
     <div class="container-fluid">
 
@@ -9,23 +9,41 @@
         <div class="row">
             <div class="col-lg-8">
                 <h1 class="page-header">
-                    <div id="msg_alert" class="container">
-                        <div class="alert">
-                            <a id="fechar_alert" href="#" class="close" aria-label="close">&times;</a>
-                            <p style="font-size:12px;"><strong>Bloqueado!</strong> O seu saldo é insuficiente ou já realizou apostas para esta partida.</p>
+                    <div id="msg_alert_danger" class="container">
+                        <div class="alert alert-danger">
+                            <a id="fechar_alert_danger" href="#" class="close" aria-label="close">&times;</a>
+                            <p style="font-size:12px;"><strong>Bloqueado!</strong> O seu saldo é insuficiente ou já
+                                realizou apostas para esta partida.</p>
                         </div>
+                    </div>
+                    <div id="msg_alert_success" class="container">
+                        <div class="alert alert-success">
+                            <a id="fechar_alert_success" href="#" class="close" aria-label="close">&times;</a>
+                            <p style="font-size:12px;"><strong>Aposta realizada com sucesso!</strong> O valor foi
+                                abatido do seu saldo.</p>
                         </div>
-                        <h2>Partidas</h2>
-                        <table class="table table-bordered" id="tb_partidas">
-                            {% csrf_token %}
+                    </div>
+                    <h2>Partidas</h2>
+                    <table class="table table-bordered" id="tb_partidas">
+                        {% csrf_token %}
+                        <thead>
+                        <tr>
+                            <th>Partida</th>
+                            <th>Apostar</th>
+                        </tr>
+                        </thead>
+                        <tbody>
                             {% for partida in partidas %}
-                            <tr>
-                                <td>{{ partida }}</td>
-                                <td><input id="{{partida.id}}" name="btApostar" class="btn btn-primary"
-                                           type="button" value="Apostar"/></td>
-                            </tr>
+                                <tr>
+                                    <td>{{ partida }}</td>
+                                    <td>
+                                        <input id="{{partida.id}}" name="btApostar" class="btn btn-primary"
+                                               type="button" value="Apostar" {% if partida in partidas_jogador %} disabled="true" {% endif %}/>
+                                    </td>
+                                </tr>
                             {% endfor %}
-                        </table>
+                        </tbody>
+                    </table>
                 </h1>
             </div>
         </div>
@@ -34,10 +52,10 @@
 
 <script type="text/javascript">
 $(document).ready(function(){
-    $('#msg_alert').hide();
+    $('.container').hide();
 
     $('#fechar_alert').click(function(){
-        $('#msg_alert').hide();
+        $('.container').hide();
     });
 
     $('#tb_partidas td input').click(function(){
@@ -51,18 +69,19 @@ $(document).ready(function(){
             success:function(data) {
                 $(this).prop("disabled", true);
                 $('#jogador_saldo').text((data["jogador"]));
-                $('#msg_alert').fadeTo(2000, 500).slideUp(500, function(){
+                $('#msg_alert_success').fadeTo(2000, 500).slideUp(500, function(){
                     $("#success-alert").alert('close');
                 });
            },
            error: function(){
-                $('#msg_alert').fadeTo(2000, 500).slideUp(500, function(){
-                    $("#danger-alert").alert('close');
+                $('#msg_alert_danger').fadeTo(2000, 500).slideUp(500, function(){
+                    $("#alert-danger").alert('close');
                 });
            }
         });
     });
 });
+
 
 
 </script>
